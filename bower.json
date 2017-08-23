@@ -13,12 +13,17 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.2.x",
-    "angular-route":"1.2.x",
-    "angular-mocks":"1.2.x",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-mocks": "latest",
     "html-to-canvas": "git://github.com/niklasvh/html2canvas.git",
     "rgbquant": "git://github.com/leeoniya/RgbQuant.js.git",
-    "angular-base64": "2.0.x",
-    "canvas2image": "git://github.com/hongru/canvas2image.git"
+    "angular-base64": "latest",
+    "canvas2image": "git://github.com/hongru/canvas2image.git",
+    "angular-material": "latest",
+    "angular-percent-circle-directive": "^1.1.1"
+  },
+  "resolutions": {
+    "angular": "1.6.6"
   }
 }

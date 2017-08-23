@@ -1,9 +1,9 @@
 'use strict';
 
 // Defining Angular app model with all other dependent modules
-var trafficApp = angular.module('trafficApp',['ngRoute', 'base64']);
+var trafficApp = angular.module('trafficApp',['ngRoute', 'base64', 'ngMaterial', 'chart.js', 'percentCircle-directive', 'angular-svg-round-progressbar']);
 
-trafficApp.config(function($routeProvider, $locationProvider, $httpProvider, $base64) {
+trafficApp.config(function($routeProvider, $locationProvider, $httpProvider, $base64, ChartJsProvider) {
 
 	// Declaration of the default route if neither of the controllers
 	// is supporting the request path
@@ -14,6 +14,7 @@ trafficApp.config(function($routeProvider, $locationProvider, $httpProvider, $ba
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	var auth = $base64.encode("LjubicaKoceva:trafficlayer");
 	$httpProvider.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+	ChartJsProvider.setOptions({ colors : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
 
 	// disabling # in Angular urls
 	// $locationProvider.html5Mode({

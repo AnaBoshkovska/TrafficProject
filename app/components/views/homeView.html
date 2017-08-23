@@ -1,8 +1,59 @@
-<div ng-controller="HomeController" id="homeController" style="position: absolute">
-<canvas hidden id="mapCanvas">
-</canvas>
-<div id="map" style="width:700px; height:500px"></div>
-<button ng-click="getCanvas()">Get canvas</button>
+<div ng-controller="HomeController" id="homeController">
+    <div class="menu-demo-container" layout-align="center center" layout="column">
+        <h2 class="md-title">Simple dropdown menu</h2>
+        <p>Applying the <code>md-menu-origin</code> and <code>md-menu-align-target</code> attributes ensure that the menu elements align.
+            Note: If you select the Redial menu option, then a modal dialog will zoom out of the phone icon button.</p>
+
+            <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="scrollToDiv()">
+                BOOM
+            </md-button>
+    </div>
+    <md-divider class="divider"></md-divider>
+    <div id="showMap" layout="column" layout-align="start center">
+        <canvas hidden id="mapCanvas">
+        </canvas>
+        <div id="map" style="width:700px; height:500px"></div>
+        <md-button ng-click="getCanvas()">Get canvas</md-button>
+    </div>
+    <div id="showData" layout="column" layout-align="start center" show="showData">
+        <div layout="row">
+            <canvas id="traffic" class="chart chart-doughnut small-doughnut"
+                    chart-data="data" chart-labels="labels" chart-colors="colors">
+            </canvas>
+        </div>
+        <md-divider class="divider"></md-divider>
+        <div layout="column">
+            <round-progress
+                    max="100"
+                    current="80"
+                    color="#45ccce"
+                    bgcolor="#eaeaea"
+                    radius="100"
+                    stroke="20"
+                    semi="true"
+                    rounded="true"
+                    clockwise="false"
+                    responsive="false"
+                    duration="800"
+                    animation="easeInOutQuart"
+                    animation-delay="0"></round-progress>
+            
+            <round-progress
+                    max="100"
+                    current="80"
+                    color="#45ccce"
+                    bgcolor="#eaeaea"
+                    radius="100"
+                    stroke="20"
+                    semi="true"
+                    rounded="true"
+                    clockwise="false"
+                    responsive="false"
+                    duration="800"
+                    animation="easeInOutQuart"
+                    animation-delay="0"></round-progress>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     function initMap() {

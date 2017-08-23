@@ -1,7 +1,7 @@
 /**
  * Created by Ljubica on 22.8.2017.
  */
-angular.module('trafficApp').factory('rgbQuantService', [function () {
+angular.module('trafficApp').factory('rgbQuantService', ['$q',function ($q) {
     var quant = {};
     quant.quantize = function (canvas) {
         var opts = {
@@ -81,10 +81,17 @@ angular.module('trafficApp').factory('rgbQuantService', [function () {
                 violet+=data[key];
             }
         }
-        console.log("Crveni: " + crvena );
-        console.log("Portokalova: " + por);
-        console.log("Zeleni: " + zelena);
-        console.log("Violetova: " + violet);
+        var sum = crvena + zelena + por + violet;
+        quant.pixels = {};
+        quant.pixels.red = crvena/sum * 100;
+        quant.pixels.red = Math.round( quant.pixels.red * 10 ) / 10;
+        quant.pixels.green = zelena/sum * 100;
+        quant.pixels.green = Math.round( quant.pixels.green * 10 ) / 10;
+        quant.pixels.orange = por/sum * 100;
+        quant.pixels.orange = Math.round( quant.pixels.orange * 10 ) / 10;
+        quant.pixels.violet = violet/sum * 100;
+        quant.pixels.violet = Math.round( quant.pixels.violet * 10 ) / 10;
+
     }
     return quant;
 }]);

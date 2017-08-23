@@ -1,9 +1,10 @@
 /**
  * Created by Ljubica on 22.8.2017.
  */
-angular.module('trafficApp').factory('html2CanvasService', ['rgbQuantService', function (rgbQuantService) {
+angular.module('trafficApp').service('html2CanvasService', ['rgbQuantService', '$q', function (rgbQuantService, $q) {
     var converted = {};
-    converted.html2canvas = function (selector) {
+    var deffered = $q.defer();
+    this.html2canvas = function (selector) {
         html2canvas(document.getElementById(selector), {
             useCORS: true,
             onrendered: function (canvas) {
@@ -18,8 +19,10 @@ angular.module('trafficApp').factory('html2CanvasService', ['rgbQuantService', f
                 document.getElementById("map").appendChild(canvas);
                 rgbQuantService.quantize(canvas);
                 rgbQuantService.countTrafficPixels();
+                deffered.resolve(rgbQuantService.pixels);
             }
         });
+        return deffered.promise;
     };
-    return converted;
+
 }]);

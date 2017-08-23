@@ -6,10 +6,25 @@
 #map {
   height: 50%;
 }
-/* Optional: Makes the sample page fill the window. */
-html, body {
-  height: 50%;
-  width: 50%;
-  margin: 0;
-  padding: 0;
+body {
+  background-image: url("../images/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height:100%; height:auto;
+}
+.transparent{
+  background-color: transparent !important;
+}
+.menu-demo-container{
+  min-height: inherit ;
+  color:white;
+  height: 100vh;
+}
+.menudemoBasicUsage .md-menu-demo {
+  padding: 24px; }
+
+.menudemoBasicUsage .menu-demo-container {
+  min-height: 200px; }
+.divider{
+  margin: 50px 100px 50px 100px;
 }
