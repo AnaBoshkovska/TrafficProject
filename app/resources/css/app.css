@@ -1,51 +1,15 @@
-/* app css stylesheet */
 
-body {
-  font-family: Helvetica;
-  font-size: 14px;
+
+
+/* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+#map {
+  height: 50%;
 }
-
-.menu {
-  margin: 0 auto;
-  width:350px;
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 50%;
+  width: 50%;
+  margin: 0;
   padding: 0;
-}
-.center{
-  margin: 0 auto;
-  width:350px;
-  padding-top: 6px;
-}
-
-form { 
-margin: 0 auto; 
-width:220px;
-}
-
-input{
-  float: right;
-  height: 10px;
 }
