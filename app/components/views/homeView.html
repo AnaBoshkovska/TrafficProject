@@ -1,4 +1,14 @@
-<div class="center">
-	<div>AngularJS starter application</div>
-	<div>This is Home View</div>
+<div ng-controller="HomeController" id="homeController" style="position: absolute">
+<canvas hidden id="mapCanvas">
+</canvas>
+<div id="map" style="width:700px; height:500px"></div>
+<button ng-click="getCanvas()">Get canvas</button>
 </div>
+<script type="text/javascript">
+    function initMap() {
+       angular.element(document.getElementById('homeController')).scope().getTrafficLayer();
+    }
+</script>
+<script type="text/javascript" async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABhxqle8by-Swkpbi_m9OM0KOJ5DknrbA&callback=initMap">
+</script>

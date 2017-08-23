@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="mostPopularListingsApp" class="no-js"><!--<![endif]-->
+<html lang="en" ng-app="trafficApp" class="no-js"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,11 +14,11 @@
   <base href="/">
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/">Home</a></li>
-    <li><a href="#/about">About</a></li>
-    <li><a href="#/login">Login</a></li>
-  </ul>
+  <!--<ul class="menu">-->
+    <!--<li><a href="#/">Home</a></li>-->
+    <!--<li><a href="#/about">About</a></li>-->
+    <!--<li><a href="#/login">Login</a></li>-->
+  <!--</ul>-->
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -29,12 +29,22 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+
+  <script src="resources/bower/jQuery/dist/jquery.js"></script>
   <script src="resources/bower/angular/angular.js"></script>
   <script src="resources/bower/angular-route/angular-route.min.js"></script>
+  <script src="resources/bower/html-to-canvas/build/html2canvas.js"></script>
+  <script src="resources/bower/rgbquant/src/rgbquant.js"></script>
+  <script src="resources/bower/canvas2image/canvas2image.js"></script>
+  <script src="resources/bower/angular-base64/angular-base64.js"></script>
   <script src="app.js"></script>
-  <script src="components/controllers/AboutController.js"></script>
+  <script src="components/services/TrafficLayer.js"></script>
+  <script src="components/services/Html2Canvas.js"></script>
+  <script src="components/services/RgbQuant.js"></script>
+  <script src="components/services/SkopjePulse.js"></script>
   <script src="components/controllers/HomeController.js"></script>
-  <script src="components/controllers/LoginController.js"></script>
+
+
 
 </body>
 </html>
