@@ -17,6 +17,8 @@
     "angular-route":"1.2.x",
     "angular-mocks":"1.2.x",
     "html-to-canvas": "git://github.com/niklasvh/html2canvas.git",
-    "rgbquant": "git://github.com/leeoniya/RgbQuant.js.git"
+    "rgbquant": "git://github.com/leeoniya/RgbQuant.js.git",
+    "angular-base64": "2.0.x",
+    "canvas2image": "git://github.com/hongru/canvas2image.git"
   }
 }
