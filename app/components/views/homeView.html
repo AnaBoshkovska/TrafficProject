@@ -1,57 +1,131 @@
-<div ng-controller="HomeController" id="homeController">
+<div ng-controller="HomeController" id="homeController" layout="column">
     <div class="menu-demo-container" layout-align="center center" layout="column">
-        <h2 class="md-title">Simple dropdown menu</h2>
-        <p>Applying the <code>md-menu-origin</code> and <code>md-menu-align-target</code> attributes ensure that the menu elements align.
-            Note: If you select the Redial menu option, then a modal dialog will zoom out of the phone icon button.</p>
-
-            <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="scrollToDiv()">
-                BOOM
+        <h2 class="md-display-3">Transport data visualization</h2>
+        <p class="md-subhead subheader">Road transport is the largest contributor to global warming,
+            through emission of carbon dioxide and air pollution.
+            Here you can compare how the transport impacts <br> on the air pollution and the amount of carbon dioxide emitted.</p>
+            <md-button class="md-icon-button icon" ng-click="scrollToDiv()">
+                <md-icon class="icon" md-font-set="md">keyboard_arrow_down</md-icon>
             </md-button>
     </div>
     <md-divider class="divider"></md-divider>
     <div id="showMap" layout="column" layout-align="start center">
-        <canvas hidden id="mapCanvas">
-        </canvas>
-        <div id="map" style="width:700px; height:500px"></div>
-        <md-button ng-click="getCanvas()">Get canvas</md-button>
-    </div>
-    <div id="showData" layout="column" layout-align="start center" show="showData">
-        <div layout="row">
-            <canvas id="traffic" class="chart chart-doughnut small-doughnut"
-                    chart-data="data" chart-labels="labels" chart-colors="colors">
-            </canvas>
+        <div layout="row" layout-align="center start">
+            <div layout="column">
+                <canvas hidden id="mapCanvas">
+                </canvas>
+                <div id="map" style="width:700px; height:500px"></div>
+            </div>
+
+            <div layout="column" flex="30" flex-offset="5" layout-align="start center">
+                <p>The Google Traffic layer modify the base map layer to display current traffic conditions. These layers are available in select regions.</p>
+                <p>Traffic Layer adds real-time traffic information (where supported) to the map. Traffic information is refreshed frequently, but not instantly.
+                    Rapid consecutive requests for the same area are unlikely to yield different results.</p>
+                <md-button ng-show="!showProgress" ng-click="getCanvas()">GET DATA</md-button>
+                <md-progress-circular ng-show="showProgress" md-mode="indeterminate"></md-progress-circular>
+            </div>
         </div>
-        <md-divider class="divider"></md-divider>
-        <div layout="column">
-            <round-progress
-                    max="100"
-                    current="80"
-                    color="#45ccce"
-                    bgcolor="#eaeaea"
-                    radius="100"
-                    stroke="20"
-                    semi="true"
-                    rounded="true"
-                    clockwise="false"
-                    responsive="false"
-                    duration="800"
-                    animation="easeInOutQuart"
-                    animation-delay="0"></round-progress>
-            
-            <round-progress
-                    max="100"
-                    current="80"
-                    color="#45ccce"
-                    bgcolor="#eaeaea"
-                    radius="100"
-                    stroke="20"
-                    semi="true"
-                    rounded="true"
-                    clockwise="false"
-                    responsive="false"
-                    duration="800"
-                    animation="easeInOutQuart"
-                    animation-delay="0"></round-progress>
+
+    </div>
+    <div id="showData" layout="column" layout-align="center center" >
+        <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak layout-align="center center" ng-show="showData">
+            <div>
+                <canvas id="traffic" class="chart chart-doughnut small-doughnut"
+                        chart-data="data" chart-labels="labels" chart-colors="colors">
+                </canvas>
+            </div>
+
+            <div flex-offset="10" layout="row" layout-align="center center">
+                <div layout="column" layout-align="center start">
+                    <div layout="row">
+                    <md-icon class="car car-green" md-font-set="md">directions_car</md-icon>
+                    </div>
+                    <div layout="row">
+                        <md-icon class="car car-orange" md-font-set="md">directions_car</md-icon>
+                        <md-icon class="car car-orange" md-font-set="md">directions_car</md-icon>
+                    </div>
+                    <div layout="row">
+                        <md-icon class="car car-red" md-font-set="md">directions_car</md-icon>
+                        <md-icon class="car car-red" md-font-set="md">directions_car</md-icon>
+                        <md-icon class="car car-red" md-font-set="md">directions_car</md-icon>
+                    </div>
+                    <div layout="row">
+                        <md-icon class="car car-violet" md-font-set="md">directions_car</md-icon>
+                        <md-icon class="car car-violet" md-font-set="md">directions_car</md-icon>
+                        <md-icon class="car car-violet" md-font-set="md">directions_car</md-icon>
+                        <md-icon class="car car-violet" md-font-set="md">directions_car</md-icon>
+                    </div>
+                </div>
+                <div layout="column" layout-align="center end">
+                    <span class="md-title">Light Traffic</span>
+                    <span class="md-title">Moderate Traffic</span>
+                    <span class="md-title">Heavy Traffic</span>
+                    <span class="md-title">Traffic congestion</span>
+                </div>
+            </div>
+        </div>
+        <md-divider ng-show="showData" class="divider"></md-divider>
+        <div layout="row" layout-align="center center" ng-show="showData">
+            <div class="progress-wrapper" layout-align="center center" layout="column">
+                <div>
+                <round-progress
+                        max="180"
+                        current="pm10"
+                        color="{{pm10Color}}"
+                        bgcolor="#eaeaea"
+                        radius="150"
+                        stroke="20"
+                        semi="false"
+                        rounded="false"
+                        clockwise="true"
+                        responsive="false"
+                        duration="800"
+                        animation="linearEase"
+                        animation-delay="0"></round-progress>
+                </div>
+                <div class="text"><span class="size">{{pm10}}</span><br> &mu;g/m<sup>3</sup></div>
+                <div class="md-headline">PM10</div>
+            </div>
+            <div flex-offset="5" class="progress-wrapper"  layout-align="center center" layout="column">
+                <div>
+                    <round-progress
+                            max="110"
+                            current="pm25"
+                            color="{{pm25Color}}"
+                            bgcolor="#eaeaea"
+                            radius="150"
+                            stroke="20"
+                            semi="false"
+                            rounded="false"
+                            clockwise="true"
+                            responsive="false"
+                            duration="800"
+                            animation="linearEase"
+                            animation-delay="0"></round-progress>
+                </div>
+                <div class="text"><span class="size" >{{pm25}}</span><br>&mu;g/m<sup>3</sup></div>
+                <div class="md-headline">PM2.5</div>
+            </div>
+            <div flex-offset="5" class="progress-wrapper"  layout-align="center center" layout="column">
+                <div>
+                    <round-progress
+                            max="60"
+                            current="temp"
+                            color="{{tempColor}}"
+                            bgcolor="#eaeaea"
+                            radius="150"
+                            stroke="20"
+                            semi="false"
+                            rounded="false"
+                            clockwise="true"
+                            responsive="false"
+                            duration="800"
+                            animation="linearEase"
+                            animation-delay="0"></round-progress>
+                </div>
+                <div class="text"><span class="size"> {{temp}}</span><br>&#x2103;</div>
+                <div class="md-headline">Temperature</div>
+            </div>
         </div>
     </div>
 </div>

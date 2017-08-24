@@ -5,6 +5,7 @@ angular.module('trafficApp').service('html2CanvasService', ['rgbQuantService', '
     var converted = {};
     var deffered = $q.defer();
     this.html2canvas = function (selector) {
+        var scrollPos = document.body.scrollTop;
         html2canvas(document.getElementById(selector), {
             useCORS: true,
             onrendered: function (canvas) {
