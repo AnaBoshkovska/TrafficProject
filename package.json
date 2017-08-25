@@ -16,7 +16,7 @@
     "bower": "1.3.x"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "bower install --allow-root",
     "prestart": "npm install",
     "start": "http-server app -a localhost -p 8000 -c-1",
     "pretest": "npm install",
@@ -36,6 +36,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "git": "^0.1.5",
     "html-to-canvas": "^0.0.11",
     "rgbquant": "^1.1.2"
   },

@@ -59,7 +59,7 @@ angular.module('trafficApp').factory('rgbQuantService', ['$q',function ($q) {
             green = parseInt(colors[1]);
             blue = parseInt(colors[2]);
 
-            if(red<234 && red>228 && green<5 && green>-1 && blue<5 && blue<-1)
+            if(red<234 && red>228 && green<5 && green>-1 && blue<5 && blue>-1)
                 rp+= parseInt(pixels[key]);
             if(red<135 && red>128 && green>198 && green<204 && blue>77 && blue<83)
                 gp+= parseInt(pixels[key]);
