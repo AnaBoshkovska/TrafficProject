@@ -17,9 +17,8 @@ angular.module('trafficApp').service('html2CanvasService', ['rgbQuantService', '
                     context.drawImage(imageObj, 0, 0);
                 };
                 converted.canvas = canvas;
-                document.getElementById("map").appendChild(canvas);
-                rgbQuantService.quantize(canvas);
-                rgbQuantService.countTrafficPixels();
+                // rgbQuantService.quantize(canvas);
+                // rgbQuantService.countTrafficPixels();
                 deffered.resolve(rgbQuantService.pixels);
             }
         });

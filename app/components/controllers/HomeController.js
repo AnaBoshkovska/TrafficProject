@@ -15,37 +15,52 @@ angular.module('trafficApp')
 	});
 }])
 // Controller definition for this module
-.controller('HomeController', ['$scope', 'trafficLayerService', 'html2CanvasService', 'skopjePulseService', 'rgbQuantService', function($scope, trafficLayerService, html2CanvasService, skopjePulseService, rgbQuantService) {
+.controller('HomeController', ['$scope', 'trafficLayerService', 'html2CanvasService', 'skopjePulseService', 'rgbQuantService', 'screenshotService', function($scope, trafficLayerService, html2CanvasService, skopjePulseService, rgbQuantService, screenshotService) {
 	$scope.showData = false;
 	$scope.showProgress = false;
 	$scope.getTrafficLayer = function(){
 		trafficLayerService.getTrafficLayer("map");
 	}
+	$scope.target1Options = {
+		filename: 'target1.png',
+		downloadText: 'Download me',
+		cancelText: 'Close it!'
+	};
 	$scope.getCanvas = function(){
-		$scope.showProgress = true;
-		html2CanvasService.html2canvas("map").then(function (response) {
-			console.log(response);
-			var pix = rgbQuantService.pixels;
-			var labels = [];
-			var data = [];
-			for(var key in pix){
-				labels.push(key);
-				data.push(pix[key]);
-			}
-			$scope.labels = ['Traffic delays', 'No traffic delays', 'Medium amount of traffic', 'Long traffic delays'];
-			$scope.data = data;
-			$scope.colors = ['#FF0000', '#00FF00', '#FFA500', '#9F1414']
-			$scope.showData = true;
-			$('html, body').animate({
-				scrollTop: $('#showData').offset().top - 20
-			}, 'fast');
-			$scope.showProgress = false;
-		}, function (error){
-			console.log(error);
-		});
+
+        var node = document.getElementById('map');
+        $scope.showProgress = true;
+        domtoimage.toPixelData(node)
+            .then(function (pixels) {
+                var pixelArr = [];
+                for (var y = 0; y < node.scrollHeight; ++y) {
+                    for (var x = 0; x < node.scrollWidth; ++x) {
+                        var pixelAtXYOffset = (4 * y * node.scrollHeight) + (4 * x);
+                        /* pixelAtXY is a Uint8Array[4] containing RGBA values of the pixel at (x, y) in the range 0..255 */
+                        var pixelAtXY = pixels.slice(pixelAtXYOffset, pixelAtXYOffset + 4);
+                        pixelArr.push(pixelAtXY);
+                    }
+                }
+                rgbQuantService.data = pixelArr;
+                rgbQuantService.countTrafficPixels();
+                var pix = rgbQuantService.pixels;
+                var labels = [];
+                var data = [];
+                for(var key in pix){
+                    labels.push(key);
+                    data.push(pix[key]);
+                }
+                $scope.labels = ['Traffic delays', 'No traffic delays', 'Medium amount of traffic', 'Long traffic delays'];
+                $scope.data = data;
+                $scope.colors = ['#FF0000', '#00FF00', '#FFA500', '#9F1414']
+                $scope.showData = true;
+                $('html, body').animate({
+                    scrollTop: $('#showData').offset().top - 20
+                }, 'fast');
+                $scope.showProgress = false;
+            });
 		skopjePulseService.getSensors().then(function(data){
 			skopjePulseService.getData(data).then(function(airData){
-				console.log(airData);
 				var humidity = airData["humidity"].avg;
 				var pm10 = airData["pm10"].avg;
 				var pm25 = airData["pm25"].avg;

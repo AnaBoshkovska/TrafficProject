@@ -34,62 +34,50 @@ angular.module('trafficApp').factory('rgbQuantService', ['$q',function ($q) {
     quant.countTrafficPixels = function(){
         var data = quant.data;
 
-        var crvena = 0;
-        var zelena = 0;
-        var por = 0;
-        var violet = 0;
 
         var pixels = {};
         var red;
         var green;
         var blue;
-        for(var i = 0; i<data.length; i+=3){
-            red = data[i];
-            green = data[i+1];
-            blue = data[i+2];
+
+        var rp = 0;
+        var op = 0;
+        var gp = 0;
+        var vp = 0;
+
+        for(var key in data){
+            red = data[key][0];
+            green = data[key][1];
+            blue = data[key][2];
             if(pixels[red + "," + green + "," + blue] === undefined)
                 pixels[red + "," + green + "," + blue] = 0;
             pixels[red + "," + green + "," + blue]++;
-            if(red > 220 && red < 256 && green > -1 && green < 15 && blue > -1 && blue < 15){
-                crvena++;
-            }
-            if(red > 220 && red < 256  && green > 100 && green < 150 && blue > 0 && blue <50){
-                por++;
-            }
-            if(red > 0 && red < 150  && green > 220 && green < 256 && blue > 0 && blue <100){
-                zelena++;
-            }
         }
+        for(var key in pixels){
+            var colors = key.split(',');
+            red = parseInt(colors[0]);
+            green = parseInt(colors[1]);
+            blue = parseInt(colors[2]);
 
-        for(var key in data){
-            var parsed = key.split(',');
-            var red = parsed[0];
-            var green = parsed[1];
-            var blue = parsed[2];
-
-            if(red > 220 && red < 240 && green > -1 && green < 40 && blue > -1 && blue < 40){
-                crvena+=data[key];
-            }
-            if(red > 230 && red < 250  && green > 110 && green < 130 && blue > -1 && blue <20){
-                por+=data[key];
-            }
-
-            if(red > 120 && red < 140  && green > 190 && green < 210 && blue > 70 && blue <90){
-                zelena+=data[key];
-            }
-            if(red > 150 && red < 170  && green > 10 && green < 30 && blue > 10 && blue <30){
-                violet+=data[key];
-            }
+            if(red<234 && red>228 && green<5 && green>-1 && blue<5 && blue<-1)
+                rp+= parseInt(pixels[key]);
+            if(red<135 && red>128 && green>198 && green<204 && blue>77 && blue<83)
+                gp+= parseInt(pixels[key]);
+            if(red>235 && red<243 && green>120 && green<127 && blue<5 && blue>-1)
+                op+= parseInt(pixels[key]);
+            if(red>153 && red<155 && green>15 && green<24 && blue>15 && blue<24)
+                vp+= parseInt(pixels[key]);
         }
-        var sum = crvena + zelena + por + violet;
+        console.log(pixels);
+        var sum = rp + gp + op + vp;
         quant.pixels = {};
-        quant.pixels.red = crvena/sum * 100;
+        quant.pixels.red = rp/sum * 100;
         quant.pixels.red = Math.round( quant.pixels.red * 10 ) / 10;
-        quant.pixels.green = zelena/sum * 100;
+        quant.pixels.green = gp/sum * 100;
         quant.pixels.green = Math.round( quant.pixels.green * 10 ) / 10;
-        quant.pixels.orange = por/sum * 100;
+        quant.pixels.orange = op/sum * 100;
         quant.pixels.orange = Math.round( quant.pixels.orange * 10 ) / 10;
-        quant.pixels.violet = violet/sum * 100;
+        quant.pixels.violet = vp/sum * 100;
         quant.pixels.violet = Math.round( quant.pixels.violet * 10 ) / 10;
 
     }

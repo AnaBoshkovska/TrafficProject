@@ -1,7 +1,7 @@
 'use strict';
 
 // Defining Angular app model with all other dependent modules
-var trafficApp = angular.module('trafficApp',['ngRoute', 'base64', 'ngMaterial', 'chart.js','angular-svg-round-progressbar']);
+var trafficApp = angular.module('trafficApp',['ngRoute', 'base64', 'ngMaterial', 'chart.js','angular-svg-round-progressbar',"angular-screenshot"]);
 
 trafficApp.config(function($routeProvider, $locationProvider, $httpProvider, $base64, ChartJsProvider, $mdIconProvider) {
 

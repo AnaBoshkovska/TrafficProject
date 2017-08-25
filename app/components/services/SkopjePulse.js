@@ -40,7 +40,6 @@ angular.module('trafficApp').service('skopjePulseService', ['$http', '$q', funct
         }).then(function successCallback(response) {
             data.aq = airQuality(response.data);
             defferedAir.resolve(data.aq);
-            console.log(data.aq);
         }, function errorCallback(response) {
             defferedAir.reject(response);
             console.log(response);
